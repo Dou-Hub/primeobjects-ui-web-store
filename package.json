@@ -1,0 +1,47 @@
+{
+    "name": "primeobjects-ui-store",
+    "licence": "MIT",
+    "version": "1.0.6",
+    "main": "build/cjs/index.js",
+    "module": "build/esm/index.js",
+    "types": "build/esm/index.d.ts",
+    "scripts": {
+        "test": "jest",
+        "build": "yarn build:esm && yarn build:cjs",
+        "build:esm": "tsc",
+        "build:cjs": "tsc --module commonjs --outDir build/cjs",
+        "prepublishOnly": "yarn build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dou-hub/primeobjects-ui-store.git"
+    },
+    "dependencies": {
+        "lodash": "^4.17.21",
+        "mobx": "^6.3.5",
+        "mobx-react": "^7.2.1",
+        "mobx-react-lite": "^3.2.1",
+        "mobx-state-tree": "^5.0.5",
+        "primeobjects-helper-util": "^1.0.12",
+        "react": "18.1.0",
+        "react-dom": "18.1.0"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.177",
+        "@types/node": "17.0.35",
+        "@types/react": "18.0.9",
+        "@types/react-dom": "18.0.5",
+        "autoprefixer": "^10.2.6",
+        "eslint": "8.16.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-es2015": "^1.1.0",
+        "eslint-config-next": "12.1.6",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jasmine": "^4.1.2",
+        "typescript": "4.7.2",
+        "jest": "^28.1.0"
+    },
+    "files": [
+        "/build"
+    ]
+}
