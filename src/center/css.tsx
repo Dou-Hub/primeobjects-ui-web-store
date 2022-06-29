@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCssStore } from './stores/css';
+import { useCssStore } from '../stores/css';
 import { map } from 'lodash';
 import { observer } from 'mobx-react-lite';
 

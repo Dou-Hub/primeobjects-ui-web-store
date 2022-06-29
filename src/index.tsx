@@ -4,11 +4,11 @@
 //  The detail information can be found in the LICENSE file in the root directory of this source tree.
 
 
-export { IMessageStore , MessageStore , useMessageStore } from './stores/message';
-export { IEnvStore , EnvStore,  useEnvStore  } from './stores/env';
-export { IContextStore , ContextStore ,  useContextStore  } from './stores/context';
-export {ICssStore, CssStore, useCssStore } from './stores/css';
+export { IMessageStore, MessageStore, useMessageStore } from './stores/message';
+export { IEnvStore, EnvStore, useEnvStore } from './stores/env';
+export { IContextStore, ContextStore, useContextStore } from './stores/context';
+export { ICssStore, CssStore, useCssStore } from './stores/css';
 
-export { EnvCenter } from './env';
-export { MessageCenter, sendMessage } from './message';
-export { CssCenter } from './css';
+export { MessageCenter, sendMessage } from './center/message';
+export { CssCenter } from './center/css';
+export { EnvCenter , DEFAULT_ENV_CACHE, ENV_DATA_TYPE} from './center/env';

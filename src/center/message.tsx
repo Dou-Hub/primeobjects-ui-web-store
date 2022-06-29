@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useMessageStore } from './stores/message';
+import { useMessageStore } from '../stores/message';
 import { isEmpty } from 'lodash';
 import { _track, _window, _process } from 'primeobjects-helper-util/build/cjs/constants';
 
