@@ -11,4 +11,4 @@ export { ICssStore, CssStore, useCssStore } from './stores/css';
 
 export { MessageCenter, sendMessage } from './center/message';
 export { CssCenter } from './center/css';
-export { EnvCenter , DEFAULT_ENV_CACHE, ENV_DATA_TYPE} from './center/env';
+export { EnvCenter , DEFAULT_ENV_CACHE, TEnvData} from './center/env';

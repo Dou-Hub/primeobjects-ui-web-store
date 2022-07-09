@@ -5,7 +5,7 @@ import { SCREEN_SIZE, useEnvStore } from "../stores/env";
 import { _track } from 'primeobjects-helper-util/build/cjs/constants';
 import { getCache, setCache, getProcess, getWindow } from 'primeobjects-helper-util/build/cjs/core';
 
-export type ENV_DATA_TYPE = {
+export type TEnvData = {
     height: number,
     width: number,
     scrollTop: number,
@@ -13,7 +13,7 @@ export type ENV_DATA_TYPE = {
     scrollHeight: number
 }
 
-export const DEFAULT_ENV_CACHE: ENV_DATA_TYPE = {
+export const DEFAULT_ENV_CACHE: TEnvData = {
     height: 0,
     width: 0,
     scrollTop: 0,
@@ -34,7 +34,7 @@ export const EnvCenter = (initialState?: Record<string, any>, screenSizes?: SCRE
 
         const envCache = getCache(LOCAL_ENV_CACHE_KEY, DEFAULT_ENV_CACHE);
 
-        const env: ENV_DATA_TYPE = {
+        const env: TEnvData = {
             width: win.innerWidth,
             height: win.innerHeight,
             offsetHeight: document.documentElement.offsetHeight,

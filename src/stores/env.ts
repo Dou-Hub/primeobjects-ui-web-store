@@ -23,7 +23,7 @@ export const DEFAULT_SCREEN_SIZES: SCREEN_SIZE[] = [
     { name: "2xl", min: 1536, max: 100000 }
 ]
 
-export type ENV_DATA_TYPE = {
+export type TEnvData = {
     height: number,
     width: number,
     scrollTop: number,
