@@ -3124,10 +3124,10 @@ primeobjects-helper-util@^1.0.18:
     slugify "^1.6.4"
     uuid "^8.3.2"
 
-primeobjects-helper-util@^1.0.26:
-  version "1.0.26"
-  resolved "https://registry.npmjs.org/primeobjects-helper-util/-/primeobjects-helper-util-1.0.26.tgz#6d79df2ba07bdf25627ba6789fb08599aadfcfda"
-  integrity sha512-9sU0pjYAKVlYhXT2f+u+lYPllUfEE6Y6EKzuEqIFqxFSlH8MPxFbRXoeB5B7TKI2xPMJZ2Y7ojGgP7PSeZ8opg==
+primeobjects-helper-util@^1.0.35:
+  version "1.0.35"
+  resolved "https://registry.npmjs.org/primeobjects-helper-util/-/primeobjects-helper-util-1.0.35.tgz#1cb86e5c9b0035bb56d02534bfc2566158737b23"
+  integrity sha512-BaOLAswOnJViMLPHbHx3PZ9eCn+W4N3vF82eJDv5sPLXNmXdpgYQCd1LP+72URdsBVRgTrn742JzdEh17PBX+Q==
   dependencies:
     csvtojson "^2.0.10"
     libphonenumber-js "^1.10.6"

@@ -1,17 +1,15 @@
-
-import { useEffect, createElement } from 'react';
-import { throttle } from 'lodash';
+import { useEffect, createElement } from "react";
+import { throttle } from "lodash";
 import { SCREEN_SIZE, useEnvStore } from "../stores/env";
-import { _track } from 'primeobjects-helper-util/build/cjs/constants';
-import { getCache, setCache, getProcess, getWindow } from 'primeobjects-helper-util/build/cjs/core';
+import { getCache, setCache, getProcess, getWindow, libTrackIsOn } from "primeobjects-helper-util/build/cjs/core";
 
 export type TEnvData = {
-    height: number,
-    width: number,
-    scrollTop: number,
-    offsetHeight: number,
-    scrollHeight: number
-}
+    height: number;
+    width: number;
+    scrollTop: number;
+    offsetHeight: number;
+    scrollHeight: number;
+};
 
 export const DEFAULT_ENV_CACHE: TEnvData = {
     height: 0,
@@ -19,17 +17,15 @@ export const DEFAULT_ENV_CACHE: TEnvData = {
     scrollTop: 0,
     offsetHeight: 0,
     scrollHeight: 0
-}
+};
 
-export const LOCAL_ENV_CACHE_KEY = 'env';
+export const LOCAL_ENV_CACHE_KEY = "env";
 
 export const EnvCenter = (initialState?: Record<string, any>, screenSizes?: SCREEN_SIZE[]) => {
-
     const envStore = useEnvStore(initialState);
     const process = getProcess();
 
     const envHandler = throttle(() => {
-
         const win = getWindow();
 
         const envCache = getCache(LOCAL_ENV_CACHE_KEY, DEFAULT_ENV_CACHE);
@@ -40,7 +36,7 @@ export const EnvCenter = (initialState?: Record<string, any>, screenSizes?: SCRE
             offsetHeight: document.documentElement.offsetHeight,
             scrollTop: document.documentElement.scrollTop,
             scrollHeight: document.documentElement.scrollHeight
-        }
+        };
 
         let hasChange = false;
 
@@ -58,9 +54,15 @@ export const EnvCenter = (initialState?: Record<string, any>, screenSizes?: SCRE
 
         if (hasChange) {
             setCache(LOCAL_ENV_CACHE_KEY, env);
-            if (_track) console.log({ height: env.height, width: env.width, offsetHeight: env.offsetHeight, scrollTop: env.scrollTop, scrollHeight: env.scrollHeight });
+            if (libTrackIsOn())
+                console.log({
+                    height: env.height,
+                    width: env.width,
+                    offsetHeight: env.offsetHeight,
+                    scrollTop: env.scrollTop,
+                    scrollHeight: env.scrollHeight
+                });
         }
-
     }, 100);
 
     const scrollHandler = () => {
@@ -69,10 +71,9 @@ export const EnvCenter = (initialState?: Record<string, any>, screenSizes?: SCRE
 
     const onBeforeUnload = () => {
         getWindow()?.scrollTo(0, 0);
-    }
+    };
 
     useEffect(() => {
-
         const win = getWindow();
 
         envHandler();
@@ -103,10 +104,10 @@ export const EnvCenter = (initialState?: Record<string, any>, screenSizes?: SCRE
                 win.detachEvent("onscroll", envHandler);
                 win.detachEvent("onbeforeunload", onBeforeUnload);
             }
-        }
+        };
     }, [process?.browser]);
 
-    return createElement('div', null, '');
+    return createElement("div", null, "");
 };
 
 export default EnvCenter;

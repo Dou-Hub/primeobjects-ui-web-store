@@ -1,21 +1,15 @@
-import { useMemo } from 'react';
-import { _process } from 'primeobjects-helper-util/build/cjs/constants';
-import { find, isEmpty } from 'lodash';
-import {
-    applySnapshot,
-    Instance,
-    SnapshotIn,
-    SnapshotOut,
-    types,
-} from 'mobx-state-tree';
+import { useMemo } from "react";
+import { getGlobalObject } from "primeobjects-helper-util/build/cjs/core";
+import { find, isEmpty } from "lodash";
+import { applySnapshot, Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree";
 
 const MESSAGE_STORE_LIST_MAX_SIZE = 100;
 
 export type Message = {
-    id: string,
-    type: string,
-    content: string
-}
+    id: string;
+    type: string;
+    content: string;
+};
 
 const MessageItem = types.model({
     id: types.string,
@@ -23,7 +17,7 @@ const MessageItem = types.model({
     content: types.string
 });
 
-const INIT_VALUE = { id: '', type: '', content: '{}', list: [] };
+const INIT_VALUE = { id: "", type: "", content: "{}", list: [] };
 
 export const MessageStore = types
     .model({
@@ -41,33 +35,32 @@ export const MessageStore = types
             if (self.list.length > MESSAGE_STORE_LIST_MAX_SIZE) {
                 self.list.shift();
             }
-        }
+        };
         const getMessage = (id: string): Message | undefined => {
             if (id == self.id) return { id: self.id, type: self.type, content: self.content };
             //try to find from array
             return find(self.list, (item) => item.id == id);
-        }
-        return { addMessage, getMessage }
-    })
+        };
+        return { addMessage, getMessage };
+    });
 
-export type IMessageStore = Instance<typeof MessageStore>
-export type IMessageStoreSnapshotIn = SnapshotIn<typeof MessageStore>
-export type IMessageStoreSnapshotOut = SnapshotOut<typeof MessageStore>
-
+export type IMessageStore = Instance<typeof MessageStore>;
+export type IMessageStoreSnapshotIn = SnapshotIn<typeof MessageStore>;
+export type IMessageStoreSnapshotOut = SnapshotOut<typeof MessageStore>;
 
 let messageStore: IMessageStore = MessageStore.create(INIT_VALUE);
 
-export const initializeMessageStore = (snapshot?:Record<string,any>) : IMessageStore => {
-    _process._messageStore = _process._messageStore ?? MessageStore.create(INIT_VALUE);
+export const initializeMessageStore = (snapshot?: Record<string, any>): IMessageStore => {
+    const global = getGlobalObject();
+    global._messageStore = global._messageStore ?? MessageStore.create(INIT_VALUE);
 
     if (snapshot && isEmpty(snapshot)) {
-        applySnapshot(_process._messageStore, snapshot);
+        applySnapshot(global._messageStore, snapshot);
     }
-    messageStore = _process._messageStore;
+    messageStore = global._messageStore;
     return messageStore;
-}
+};
 
-export function useMessageStore(initialState?: Record<string,any>) {
+export function useMessageStore(initialState?: Record<string, any>) {
     return useMemo(() => initializeMessageStore(initialState), [initialState]);
 }
-
